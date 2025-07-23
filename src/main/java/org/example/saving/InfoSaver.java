@@ -35,7 +35,7 @@ public class InfoSaver {
      * @param info обьект инфо из которого создаём строку файла. Один инфо -- одна строка
      * @param fields какие поля из инфо будем использовать
      * @param delimiter разделитель между полями в файле
-     * @return строку с данными из инфо , разделенные delimiter
+     * @return строку с данными из инфо, разделенные delimiter
      */
     private static String createRow(Info info, List<CsvField> fields, String delimiter) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
@@ -47,6 +47,8 @@ public class InfoSaver {
             String fieldValue = "";
             if (CsvField.NAME.equals(field)) {
                 fieldValue = info.getName() != null ? info.getName() : "";
+            } else if (CsvField.ID.equals(field)) {
+                fieldValue = info.getId() != null ? info.getId() : "";
             } else if (CsvField.PHONE.equals(field)) {
                 fieldValue = info.getPhone() != null ? info.getPhone() : "";
             } else if (CsvField.DATE_TIME.equals(field)) {

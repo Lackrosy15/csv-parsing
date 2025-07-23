@@ -17,7 +17,7 @@ public class InfoLoader {
      * Метод создает список инфо из файла в папке kommocsv. Вызывает метод {@link #loadInfos}
      *
      * @param fields список полей которые есть в файле
-     * @return список инфо с заполнеными полями которые указаны в списке fields
+     * @return список инфо с заполненными полями которые указаны в списке fields
      * @throws IOException
      */
     public static List<Info> loadInfosFromKommocsv(List<CsvField> fields) throws IOException {

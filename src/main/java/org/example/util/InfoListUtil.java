@@ -45,7 +45,7 @@ public class InfoListUtil {
         return new ArrayList<>(map.values());
     }
 
-    //возвращает мапу в формате "Телефон": "Даты покупок" на основе list
+
     private static Map<String, List<Date>> buildDatePurchaseMap(Collection<Info> infoCollection) {
         var map = infoCollection.stream()
                 .collect(Collectors.groupingBy(Info::getPhone, Collectors.mapping(Info::getDate, Collectors.toList())));
