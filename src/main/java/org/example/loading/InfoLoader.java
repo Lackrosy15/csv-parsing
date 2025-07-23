@@ -7,6 +7,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class InfoLoader {
@@ -23,10 +25,10 @@ public class InfoLoader {
         if (!sourceDir.exists()) {
             sourceDir.mkdir();
         }
-        if(sourceDir.listFiles().length == 0) {
+        if (sourceDir.listFiles().length == 0) {
             throw new RuntimeException("В папке kommocsv нет файла");
         }
-        if(sourceDir.listFiles().length > 1) {
+        if (sourceDir.listFiles().length > 1) {
             throw new RuntimeException("В папке kommocsv больше одного файла");
         }
         File csvFile = sourceDir.listFiles()[0];
@@ -37,7 +39,7 @@ public class InfoLoader {
      * Метод создает список инфо из файла и оставляет только те записи, в которых есть номер
      *
      * @param csvFile файл из которого грузим базу
-     * @param fields список полей которые есть в файле
+     * @param fields  список полей которые есть в файле
      * @return список инфо с заполнеными полями которые указаны в списке fields
      * @throws IOException
      */
@@ -52,7 +54,7 @@ public class InfoLoader {
         CSVParser csvParser = csvFormat.parse(new FileReader(csvFile, Charset.forName("windows-1251")));
         return csvParser.stream()
                 .map(csvRecord -> new Info(csvRecord))
-                .filter(info -> info.getPhone()!=null)
+                .filter(info -> info.getPhone() != null)
                 .toList();
     }
 }

@@ -39,6 +39,12 @@ public class InfoListUtil {
                 .toList();
     }
 
+    public static List<Info> uniqValuesByPhoneNumber(List<Info> infos) {
+        var map = new HashMap<String, Info>();
+        infos.forEach(info -> map.put(info.getPhone(), info));
+        return new ArrayList<>(map.values());
+    }
+
     //возвращает мапу в формате "Телефон": "Даты покупок" на основе list
     private static Map<String, List<Date>> buildDatePurchaseMap(Collection<Info> infoCollection) {
         var map = infoCollection.stream()

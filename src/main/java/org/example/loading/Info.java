@@ -17,6 +17,7 @@ public class Info {
     private String phone;
     private String email;
     private String name;
+    private String id;
 
     //создание объекта и фильтрация телефона
     public Info(CSVRecord csvRecord) {
@@ -25,6 +26,9 @@ public class Info {
         try {
             if (csvRecord.isMapped(CsvField.NAME.name())) {
                 name = csvRecord.get(CsvField.NAME);
+            }
+            if (csvRecord.isMapped(CsvField.ID.name())) {
+                id = csvRecord.get(CsvField.ID);
             }
             if (csvRecord.isMapped(CsvField.DATE_TIME.name())) {
                 date = format.parse(csvRecord.get(CsvField.DATE_TIME));
