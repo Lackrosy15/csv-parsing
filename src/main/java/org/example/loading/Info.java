@@ -31,7 +31,10 @@ public class Info {
                 id = csvRecord.get(CsvField.ID);
             }
             if (csvRecord.isMapped(CsvField.DATE_TIME.name())) {
-                date = format.parse(csvRecord.get(CsvField.DATE_TIME));
+                String dateStr = csvRecord.get(CsvField.DATE_TIME);
+                if (dateStr != null && !dateStr.trim().isEmpty()) {
+                    date = format.parse(dateStr);
+                }
             }
             if (csvRecord.isMapped(CsvField.PHONE.name())) {
                 phone = loadPhone(csvRecord.get(CsvField.PHONE));
