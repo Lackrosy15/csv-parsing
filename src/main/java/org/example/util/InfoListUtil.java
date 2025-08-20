@@ -21,8 +21,22 @@ public class InfoListUtil {
         Map<String, List<Date>> map = buildDatePurchaseMap(infos);
 
         return infos.stream()
-                .filter(info -> map.get(info.getPhone()).size() >= count)
+                .filter(info -> map.get(info.getPhone()).size() > count)
                 .toList();
+    }
+
+    public static List<Info> filterByMoreDatePurchase(List<Info> infos, Date date) {
+        Map<String, List<Date>> map = buildDatePurchaseMap(infos);
+
+        return infos.stream()
+                .filter(info -> {
+                    List<Date> dates = map.get(info.getPhone());
+                    return dates != null &&
+                            dates.stream()
+                                    .filter(Objects::nonNull)
+                                    .anyMatch(d -> d.after(date));
+                })
+                .collect(Collectors.toList());
     }
 
     public static List<Info> onlyLatest(List<Info> infos) {
