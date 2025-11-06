@@ -21,7 +21,7 @@ public class InfoListUtil {
         Map<String, List<Date>> map = buildDatePurchaseMap(infos);
 
         return infos.stream()
-                .filter(info -> map.get(info.getPhone()).size() > count)
+                .filter(info -> map.get(info.getPhone()).size() >= count)
                 .toList();
     }
 

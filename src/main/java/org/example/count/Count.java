@@ -12,23 +12,26 @@ public class Count {
     public static void main(String[] args) throws IOException {
 
         //кол-во вхождений
-        Files.lines(Path.of("C:\\Users\\User\\IdeaProjects\\csv-parsing\\input\\count"), Charset.forName("UTF-8"))
+        Files.lines(Path.of("C:\\Users\\User\\IdeaProjects\\csv-parsing\\input\\count.csv"), Charset.forName("windows-1251"))
                 .map(s -> s.replaceAll("м\\.\\s*", "")
                         .replaceAll("М\\.\\s*", "")
                         .replaceAll("м\\s+", "")
                         .replaceAll("М\\s+", "")
+
                         .replaceAll("місто\\s*", "")
                         .replaceAll("Місто\\s*", "")
+
                         .replaceAll("с\\.\\s*", "")
-                        .replaceAll("с\\s*", "")
+                        .replaceAll("с\\s+", "")
                         .replaceAll("С\\.\\s*", "")
-                        .replaceAll("С\\s*", "")
+                        .replaceAll("С\\s+", "")
+
                         .replaceAll("село\\s*", "")
                         .replaceAll("Село\\s*", "")
                         .replaceAll("смт\\.\\s*", "")
-                        .replaceAll("смт\\s*", "")
+                        .replaceAll("смт\\s+", "")
                         .replaceAll("т\\.\\s*", "")
-                        .replaceAll("[\".]", "")
+                        .replaceAll("[\"?.]", "")
                         .trim())
                 .filter(Predicate.not(String::isBlank))
                 // Группировка и подсчет

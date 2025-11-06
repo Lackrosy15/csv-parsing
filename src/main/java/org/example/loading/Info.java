@@ -57,5 +57,7 @@ public class Info {
                 .findFirst()
                 .orElse(phones.stream().filter(p -> p.startsWith("0") && p.length() == 10).map(s -> "38" + s).findFirst().orElse(""));
     }
+
+
 }
 

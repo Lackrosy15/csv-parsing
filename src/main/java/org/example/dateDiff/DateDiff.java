@@ -37,7 +37,7 @@ public class DateDiff {
         }
     }
 
-    private static Date parse(SimpleDateFormat format, String string) {
+    public static Date parse(SimpleDateFormat format, String string) {
         try {
             return format.parse(string);
         } catch (ParseException e) {
