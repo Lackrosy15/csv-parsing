@@ -7,6 +7,16 @@ import java.util.stream.Collectors;
 
 public class InfoListUtil {
 
+    public static List<Info> intersectionInfo(List<Info> infos1, List<Info> infos2) {
+        Set<String> phoneSet = infos2.stream()
+                .map(Info::getPhone)
+                .collect(Collectors.toSet());
+
+        return infos1.stream()
+                .filter(info -> phoneSet.contains(info.getPhone()))
+                .toList();
+    }
+
     public static List<Info> firstMinusSecond(List<Info> infos1, List<Info> infos2) {
         Set<String> phoneSet = infos2.stream()
                 .map(Info::getPhone)
