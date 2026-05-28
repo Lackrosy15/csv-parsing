@@ -1,5 +1,5 @@
 package org.example.loading;
 
 public enum CsvField {
-    NAME, EMAIL, DATE_TIME, PHONE, ID
+    NAME, EMAIL, DATE_TIME, PHONE, ID, BUDGET, CITY
 }

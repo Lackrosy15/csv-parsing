@@ -18,6 +18,8 @@ public class Info {
     private String email;
     private String name;
     private String id;
+    private String budget;
+    private String city;
 
     //создание объекта и фильтрация телефона
     public Info(CSVRecord csvRecord) {
@@ -42,6 +44,12 @@ public class Info {
             if (csvRecord.isMapped(CsvField.EMAIL.name())) {
                 email = csvRecord.get(CsvField.EMAIL);
             }
+            if (csvRecord.isMapped(CsvField.BUDGET.name())) {
+                budget = csvRecord.get(CsvField.BUDGET);
+            }
+            if (csvRecord.isMapped(CsvField.CITY.name())) {
+                city = csvRecord.get(CsvField.CITY);
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -57,7 +65,6 @@ public class Info {
                 .findFirst()
                 .orElse(phones.stream().filter(p -> p.startsWith("0") && p.length() == 10).map(s -> "38" + s).findFirst().orElse(""));
     }
-
 
 }
 

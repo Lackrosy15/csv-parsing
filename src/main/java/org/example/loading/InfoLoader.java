@@ -44,7 +44,7 @@ public class InfoLoader {
     public static List<Info> loadInfos(File csvFile, List<CsvField> fields) throws IOException {
         CSVFormat csvFormat = CSVFormat.DEFAULT.builder()
                 .setHeader(fields.stream().map(Enum::name).toList().toArray(new String[]{}))
-                .setSkipHeaderRecord(false)
+                .setSkipHeaderRecord(true)
                 .setDelimiter(";")
                 .setTrim(true)
                 .get();

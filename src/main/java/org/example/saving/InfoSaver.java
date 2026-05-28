@@ -1,13 +1,17 @@
 package org.example.saving;
 
+import org.example.loading.Contact;
 import org.example.loading.CsvField;
 import org.example.loading.Info;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class InfoSaver {
     /**
@@ -27,6 +31,29 @@ public class InfoSaver {
         try (FileWriter fileWriter = new FileWriter(csvFile)) {
             for (Info info : infos) {
                 fileWriter.write(createRow(info, fields, delimiter));
+            }
+        }
+    }
+
+    public static void saveContacts(String csvFileName, List<Contact> contacts, String delimiter) throws IOException {
+        new File("results").mkdirs();
+        File csvFile = new File("results", csvFileName);
+        csvFile.delete();
+        csvFile.createNewFile();
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(csvFile, StandardCharsets.UTF_8))) {
+            for (Contact contact : contacts) {
+                String phone = contact.getPhone();
+                String dates = contact.getDate().stream()
+                        .map(simpleDateFormat::format)
+                        .collect(Collectors.joining(";"));
+                String totalBudget = contact.getSumBudgets();
+
+                String line = String.join(delimiter, phone, dates, totalBudget);
+                writer.write(line);
+                writer.newLine();
             }
         }
     }
@@ -55,6 +82,8 @@ public class InfoSaver {
                 fieldValue = info.getDate() != null ? simpleDateFormat.format(info.getDate()) : "";
             } else if (CsvField.EMAIL.equals(field)) {
                 fieldValue = info.getEmail() != null ? info.getEmail() : "";
+            } else if (CsvField.CITY.equals(field)) {
+                fieldValue = info.getCity() != null ? info.getCity() : "";
             }
             row.append(fieldValue);
             if (i != fields.size() - 1) {
@@ -63,4 +92,5 @@ public class InfoSaver {
         }
         return row.append("\n").toString();
     }
+
 }
